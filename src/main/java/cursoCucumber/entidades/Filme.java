@@ -19,4 +19,8 @@ public class Filme {
 		return aluguel;
 	}
 
+	public int getEstoque() {
+		return estoque;
+	}
+
 }

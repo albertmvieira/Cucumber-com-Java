@@ -1,5 +1,8 @@
 package cursoCucumber.steps;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import org.junit.Assert;
 
 import cucumber.api.java.en.Given;
@@ -9,6 +12,8 @@ import cursoCucumber.entidades.Filme;
 import cursoCucumber.entidades.NotaAluguel;
 import cursoCucumber.services.AluguelService;
 import sun.security.util.PendingException;
+
+// Ctrl + Shift + o = import geral de todas dependencias necessárias 
 
 public class AlugarFilmeSteps {
 	
@@ -39,12 +44,25 @@ public class AlugarFilmeSteps {
 
 	@Then("^a data de entrega será no dia seguinte$")
 	public void aDataDeEntregaSeráNoDiaSeguinte() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	    Calendar cal = Calendar.getInstance();
+	    cal.add(Calendar.DAY_OF_MONTH, 1);
+	    
+	    Date dataRetorno = nota.getDataEntrega();
+	    Calendar calRetorno = Calendar.getInstance();
+	    calRetorno.setTime(dataRetorno);
+	    
+	    Assert.assertEquals(cal.get(Calendar.DAY_OF_MONTH), calRetorno.get(Calendar.DAY_OF_MONTH));
+	    Assert.assertEquals(cal.get(Calendar.MONTH), calRetorno.get(Calendar.MONTH));
+	    Assert.assertEquals(cal.get(Calendar.YEAR), calRetorno.get(Calendar.YEAR));
 	}
 
 	@Then("^e o estoque do filme será (\\d+) unidade$")
 	public void eOEstoqueDoFilmeSeráUnidade(int arg1) throws Throwable {
+	    Assert.assertEquals(arg1, filme.getEstoque());
+	}
+	
+	@Then("^não será possível por falta de estoque$")
+	public void nãoSeráPossívelPorFaltaDeEstoque() throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new PendingException();
 	}
