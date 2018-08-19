@@ -1,4 +1,4 @@
-@test1
+@unitarios @test1
 Feature: Aprender Cucumber
   Como um aluno
   Eu quero aprender a utilizar cucumber
